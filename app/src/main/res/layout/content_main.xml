@@ -62,7 +62,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/test_q_1"
         app:layout_constraintBottom_toTopOf="@+id/RandomNumTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -87,18 +87,20 @@ public class MainActivity extends AppCompatActivity
         RandNumTextView=findViewById(R.id.RandomNumTextView);
         QuestionPic=findViewById(R.id.QuestionPic);
 
+        QuestionPic.setImageResource(getResources().getIdentifier("@drawable/test_img",null,this.getPackageName()));
+
        final ImageSelector imgselector= new ImageSelector();
-        imgselector.SetCurrentImageNumber(1);
+        imgselector.SetCurrentImageNumber(0);
 
 
 
         GetQuestionButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //Get picture 2
-                int NewImagenum=RandomNumberRange(2,1,imgselector.GetCurrentImageNumber());
+                //Get picture
+                int NewImagenum=RandomNumberRange(3,1,imgselector.GetCurrentImageNumber());
                 RandNumTextView.setText(Integer.toString(NewImagenum));
-                String ImageString="@/drawable/test_q_"+Integer.toString(NewImagenum);
+                String ImageString="@drawable/aqa_h_jun_2017_1_q"+Integer.toString(NewImagenum);
                 int Imageint=getResources().getIdentifier(ImageString,null,"com.example.qedquestioneveryday");
                 QuestionPic.setImageResource(Imageint);
                 imgselector.SetCurrentImageNumber(NewImagenum);
@@ -111,9 +113,10 @@ public class MainActivity extends AppCompatActivity
         GetAnswerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Random rand = new Random();
-                int randnum = rand.nextInt(50);
-                RandNumTextView.setText(Integer.toString(randnum));
+                String ImageString="@drawable/aqa_h_jun_2017_1_a"+Integer.toString(imgselector.GetCurrentImageNumber());
+                int Imageint=getResources().getIdentifier(ImageString,null,"com.example.qedquestioneveryday");
+                QuestionPic.setImageResource(Imageint);
+
             }
 
 
