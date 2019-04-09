@@ -1,6 +1,5 @@
 package com.example.qedquestioneveryday;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,39 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Random;
-//import com.example.qedquestioneveryday.ImageSelector;
-
-public class MainActivity extends AppCompatActivity
+public class AnswerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button GetAnswerButton;
-    Button GetQuestionButton;
-    TextView RandNumTextView;
-    ImageView QuestionPic;
-
-    //BlockNumber function
-    public static Integer RandomNumberRange(int max, int min, int block)
-    {
-        Random rand = new Random();
-        int randomNum;
-
-        do {
-            randomNum = rand.nextInt((max - min) + 1) + min;
-        } while (randomNum == block);
-
-        return randomNum;
-    }
+    TextView TestTextView2;
+    ImageView AnswerImageView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_answer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Answer");
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -67,50 +48,20 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        TestTextView2=findViewById(R.id.TestTextView2);
+        AnswerImageView2=findViewById(R.id.AnswerImageView2);
 
-        GetAnswerButton=findViewById(R.id.CheckAnswerButton);
-        GetQuestionButton=findViewById(R.id.GetQuestionButton);
-        RandNumTextView=findViewById(R.id.RandNumTextView);
-        QuestionPic=findViewById(R.id.QuestionPic);
-
-        QuestionPic.setImageResource(getResources().getIdentifier("@drawable/test_img",null,this.getPackageName()));
-
-       final ImageSelector imgselector= new ImageSelector();
-        imgselector.SetCurrentImageNumber(0);
-
-
-
-        GetQuestionButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //Get picture
-                int NewImagenum=RandomNumberRange(3,1,imgselector.GetCurrentImageNumber());
-                RandNumTextView.setText(Integer.toString(NewImagenum));
-                String ImageString="@drawable/aqa_h_jun_2017_1_q"+Integer.toString(NewImagenum);
-                int Imageint=getResources().getIdentifier(ImageString,null,"com.example.qedquestioneveryday");
-                QuestionPic.setImageResource(Imageint);
-                imgselector.SetCurrentImageNumber(NewImagenum);
-
-
-
-            }
-        });
-
-        GetAnswerButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent transferimgselector=new Intent(getApplicationContext(), AnswerActivity.class);
-                int num_to_transfer=imgselector.GetCurrentImageNumber();
-                transferimgselector.putExtra("image_selector_num",num_to_transfer);
-                startActivity(transferimgselector);
-
-            }
-
-
-        });
-
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            return;
+        }
+        // get data via the key
+        int value1 = extras.getInt("image_selector_num",0);
+        TestTextView2.setText(Integer.toString(value1));
+        String ImageString="@drawable/aqa_h_jun_2017_1_a"+Integer.toString(value1);
+        int Imageint=getResources().getIdentifier(ImageString,null,"com.example.qedquestioneveryday");
+        AnswerImageView2.setImageResource(Imageint);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -125,7 +76,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.answer, menu);
         return true;
     }
 
@@ -168,5 +119,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }
