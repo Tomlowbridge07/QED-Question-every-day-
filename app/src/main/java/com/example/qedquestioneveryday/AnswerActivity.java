@@ -26,6 +26,7 @@ public class AnswerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //Change toolbar title
         toolbar.setTitle("Answer");
         setSupportActionBar(toolbar);
 
